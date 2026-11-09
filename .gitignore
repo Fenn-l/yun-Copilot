@@ -1,0 +1,28 @@
+# Java / Maven
+target/
+*.log
+*.class
+.mvn/timing.properties
+
+# Runtime data
+data/
+logs/
+
+# Node / Vite
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local secrets
+.env
+.env.local
+application-local.yml

@@ -1,0 +1,80 @@
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+
+spring:
+  application:
+    name: customer-copilot
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:customer_copilot}?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useSSL=false&rewriteBatchedStatements=true
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 12
+      minimum-idle: 2
+      connection-timeout: 10000
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      encoding: UTF-8
+      continue-on-error: false
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 60MB
+  jackson:
+    time-zone: Asia/Shanghai
+    date-format: yyyy-MM-dd HH:mm:ss
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
+
+app:
+  jwt:
+    secret: "customer-copilot-demo-secret-key-please-change-in-production-2026-@#"
+    expire-hours: 24
+  storage:
+    local-dir: ./data/uploads
+  rag:
+    top-k: 5
+    score-threshold: 0.34
+    chunk-size: 420
+    chunk-overlap: 60
+    max-context-chars: 7000
+    history-limit: 8
+    max-upload-mb: 50
+  ai:
+    bailian:
+      api-key: ${DASHSCOPE_API_KEY:}
+      base-url: https://dashscope.aliyuncs.com/compatible-mode/v1
+      chat-model: qwen-plus
+      embedding-model: text-embedding-v4
+      embedding-dim: 1024
+      max-tokens: 1500
+    ollama:
+      base-url: http://localhost:11434/v1
+      api-key: ollama
+      chat-model: deepseek-r1:8b
+      embedding-model: nomic-embed-text
+      embedding-dim: 768
+      max-tokens: 512
+  seed:
+    enabled: true
+    knowledge: true
+
+logging:
+  level:
+    root: INFO
+    com.example.copilot: INFO
+    org.springframework.ai: WARN
+    com.baomidou.mybatisplus: WARN
