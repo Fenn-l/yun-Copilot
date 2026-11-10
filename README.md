@@ -35,7 +35,7 @@ Embedding 向量以 `MEDIUMBLOB` 序列化保存在 `kb_chunk` 中，按知识�
 
 ### 1. 配置 MySQL
 
-默认连接 `127.0.0.1:3306`，账号 `root`，密码 `zxcv1234`。应用会自动创建 `customer_copilot` 数据库并初始化表结构。可通过环境变量覆盖：
+默认连接 `127.0.0.1:3306`，账号 `root`，密码 `这是我的秘密`。应用会自动创建 `customer_copilot` 数据库并初始化表结构。可通过环境变量覆盖：
 
 ```powershell
 $env:MYSQL_HOST = '127.0.0.1'
